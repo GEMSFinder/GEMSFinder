@@ -1,0 +1,2302 @@
+Screens:
+    LoginScreen:
+    HomeScreen
+    Electronics
+    Stationary
+    Books
+    Clothes
+    Others
+    ReportItems
+    NotFound
+    Photo
+    FoundItemDescription
+    SweaterDescription
+    Proof
+
+<LoginScreen>:
+    name:"Login Screen"
+    LoginArea:
+        MDCard:
+            size_hint:None,None
+            size:dp(370),dp(400)
+            pos_hint:{"center_x":.5,"center_y":.5}
+            elevation:5
+            spacing: 25
+            padding:25
+            orientation:'vertical'
+
+
+            MDLabel:
+                text:"Login"
+                font_size:25
+                halign:'center'
+                size_hint_y:None
+                height:self.texture_size[1]
+
+
+            TextInput:
+                id:username
+
+                size_hint:None,None
+                width:"200dp"
+                height:"35dp"
+                font_size: 18
+                hint_text:"Username"
+                pos_hint: {"center_x": 0.5}
+                multiline:False
+                on_text_validate : root.reset()
+
+
+            TextInput:
+
+                id:password
+                password:True
+
+                size_hint:None,None
+                width:"200dp"
+                height:"35dp"
+                font_size: 18
+                hint_text:"Password"
+                pos_hint: {"center_x": 0.5}
+                multiline:False
+                on_text_validate :root.reseto()
+
+
+
+            Label:
+                id:incorrect
+                background_color:0,0,0,0
+
+
+
+
+                Image:
+                    source:"C:\\Users\\USER\\Pictures\\Game Sprites\\error.png"
+                    center_x:self.parent.center_x
+                    center_y:self.parent.center_y
+                    size_hint_y:None
+                    width:dp(350)
+                    allow_stretch:True
+                    #disabled:not self.parent.visible0
+
+                    opacity:root.check
+
+            Button:
+                id:login
+                text:"login"
+                font_size:0
+                background_color:0,0,0,0
+                on_press:root.login()
+
+
+
+
+
+                Image:
+                    source:"C:\\Users\\USER\\Pictures\\Game Sprites\\login.png"
+                    center_x:self.parent.center_x
+                    center_y:self.parent.center_y
+<HomeScreen>:
+    name:"homescreen"
+    FloatLayout:
+        size:root.width,root.height
+
+        MDCard:
+            orientation:'vertical'
+            pos_hint:{"center_x":0.5,"center_y":0.1}
+            size_hint:None,None
+            width:root.width-(root.width*1/6)
+            height:root.height-(root.height*1/8)
+            pos_hint:{"center_x":.5,"center_y":.5}
+            elevation:5
+
+
+
+            Label:
+
+
+                font_size:30
+                text:"Latest Items"
+
+            Label:
+
+                font_size:20
+                text:"Found Items"
+
+
+
+            HomeFound:
+                size_hint:None,None
+                width:self.parent.width
+                height:self.parent.height/4
+                #cols:12
+                rows:2
+
+                Button:
+                    id:ipad
+                    text:"Ipad"
+                    on_press:root.itemdescription()
+                Button:
+                    on_press:root.sweater()
+                    id:sweater
+                    text:"sweater"
+            Label:
+                pos_hint:{"center_x":.2}
+                font_size:20
+                text:"Lost Items"
+
+
+
+            HomeFound:
+                size_hint:None,None
+                width:self.parent.width
+                height:self.parent.height/4
+                rows:2
+
+                Button:
+                    text:"Ipad"
+
+                Button:
+                    text:"sweater"
+
+
+
+
+        MDCard:
+            id:menu
+            orientation:'vertical'
+            pos_hint:{"x":root.switch}
+            size_hint:None,None
+            width:root.width/4.5
+            height:root.height
+
+            MDCard:
+                orientation:'vertical'
+                padding:-20
+                pos_hint:{"top":1}
+
+
+                Label:
+                    center_x:self.parent.center_x
+                    font_size:20
+                    text:"Menu"
+
+            Spinner:
+                id:FoundItemsCategories
+                text:"Found Items"
+                values:['Electronics','Stationary','Books','Clothes','Other']
+                on_text:root.FoundCategories(FoundItemsCategories.text)
+                #sync_height=True
+
+            Label:
+            Label:
+            Label:
+            Label:
+            Label:
+
+
+            Button:
+                center_x:self.parent.center_x
+                center_y:self.parent.center_y
+                text:"Report Lost Items"
+                on_press:root.reportitems()
+
+            Label:
+            Label:
+            Label:
+            Label:
+            Label:
+
+
+
+
+        Button:
+            background_color:0,0,0,0
+            pos_hint:{"center_y":0.5,"x":root.extend_x}
+            size_hint:None,None
+            width:40
+            height:90
+
+
+            on_press:root.extend()
+
+            Image:
+                opacity:1
+                source:root.extendSign
+                center_x:self.parent.center_x
+                center_y:self.parent.center_y
+        TopMenu:
+            orientation:'horizontal'
+            pos_hint:{"x":0.22, "top":1}
+            size_hint:None,None
+            width:root.width*0.77
+            height:"35dp"
+
+            MDCard:
+                pos_hint:{"center_x":1, "top":1}
+
+                width:"770dp"
+                height:"35dp"
+
+                TextInput:
+                    id:searchbar
+                    font_size:18
+
+                    hint_text:"Search"
+                    on_text_validate:root.search()
+
+                Button:
+                    pos_hint:{"x":.3, "top":.95}
+                    size_hint:None,None
+                    width:"30dp"
+                    height:"35dp"
+                    background_color:0,0,0,0
+
+
+                    Image:
+                        source:"C:\\Users\\USER\\Pictures\\Game Sprites\\searchicon.png"
+                        width:"30dp"
+                        height:"30dp"
+                        center_x:self.parent.center_x
+                        center_y:self.parent.center_y
+
+
+                MDCard:
+                    pos_hint:{"x":.754,"top":1}
+                    size_hint:None,None
+                    width:"270dp"
+                    height:"35dp"
+
+                    Label:
+                        text:"Username"
+
+
+                Button:
+                    pos_hint:{"x":.965, "top":1}
+                    size_hint:None,None
+                    width:"27dp"
+                    height:"30dp"
+                    background_color:0,0,0,0
+                    on_press:root.logout()
+                    Image:
+                        source:"C:\\Users\\USER\\Pictures\\Game Sprites\\logo.jpg"
+                        center_x:self.parent.center_x
+                        center_y:self.parent.center_y
+                        width:"65dp"
+                        height:"42dp"
+
+
+
+
+<Electronics>:
+    name:"electronics"
+    FloatLayout:
+        size:root.width,root.height
+        MDCard:
+            orientation:'vertical'
+            pos_hint:{"center_x":0.5,"center_y":0.1}
+            size_hint:None,None
+            width:root.width-(root.width*1/6)
+            height:root.height-(root.height*1/8)
+            pos_hint:{"center_x":.5,"center_y":.5}
+            elevation:5
+
+
+
+            Label:
+
+
+                font_size:30
+                text:"Electronics"
+
+
+            HomeFound:
+                width:self.parent.width
+                rows:2
+
+                Button:
+                    text:"Ipad"
+                Button:
+                    text:"Razor Mouse"
+
+                Button
+                    text:"MI Band"
+
+
+
+
+        MDCard:
+            id:menu
+            orientation:'vertical'
+            pos_hint:{"x":root.switch}
+            size_hint:None,None
+            width:root.width/4.5
+            height:root.height
+
+            MDCard:
+                orientation:'vertical'
+                padding:-20
+                pos_hint:{"top":1}
+
+
+                Label:
+                    center_x:self.parent.center_x
+                    font_size:20
+                    text:"Menu"
+
+            Spinner:
+                id:FoundItemsCategories
+                text:"Found Items"
+                values:['Electronics','Stationary','Books','Clothes','Other']
+                on_text:root.FoundCategories(FoundItemsCategories.text)
+                #sync_height=True
+
+            Label:
+            Label:
+            Label:
+            Label:
+            Label:
+
+
+            Button:
+                center_x:self.parent.center_x
+                center_y:self.parent.center_y
+                text:"Report Lost Items"
+                on_press:root.reportitems()
+
+            Label:
+            Label:
+            Label:
+            Label:
+            Label:
+
+
+
+
+        Button:
+            background_color:0,0,0,0
+            pos_hint:{"center_y":0.5,"x":root.extend_x}
+            size_hint:None,None
+            width:40
+            height:90
+
+
+            on_press:root.extend()
+
+            Image:
+                opacity:1
+                source:root.extendSign
+                center_x:self.parent.center_x
+                center_y:self.parent.center_y
+        TopMenu:
+            orientation:'horizontal'
+            pos_hint:{"x":0.22, "top":1}
+            size_hint:None,None
+            width:root.width*0.77
+            height:"35dp"
+
+            MDCard:
+                pos_hint:{"center_x":1, "top":1}
+
+                width:"770dp"
+                height:"35dp"
+
+                TextInput:
+                    id:searchbar
+                    font_size:18
+
+                    hint_text:"Search"
+                    on_text_validate:root.search()
+
+                Button:
+                    pos_hint:{"x":.3, "top":.95}
+                    size_hint:None,None
+                    width:"30dp"
+                    height:"35dp"
+                    background_color:0,0,0,0
+
+
+                    Image:
+                        source:"C:\\Users\\USER\\Pictures\\Game Sprites\\searchicon.png"
+                        width:"30dp"
+                        height:"30dp"
+                        center_x:self.parent.center_x
+                        center_y:self.parent.center_y
+
+
+                MDCard:
+                    pos_hint:{"x":.754,"top":1}
+                    size_hint:None,None
+                    width:"270dp"
+                    height:"35dp"
+
+                    Label:
+                        text:"Username"
+
+
+                Button:
+                    pos_hint:{"x":.965, "top":1}
+                    size_hint:None,None
+                    width:"27dp"
+                    height:"30dp"
+                    background_color:0,0,0,0
+                    on_press:root.logout()
+                    Image:
+                        source:"C:\\Users\\USER\\Pictures\\Game Sprites\\logo.jpg"
+                        center_x:self.parent.center_x
+                        center_y:self.parent.center_y
+                        width:"65dp"
+                        height:"42dp"
+
+
+<Stationary>:
+    name:"stationary"
+    FloatLayout:
+        size:root.width,root.height
+
+        MDCard:
+            orientation:'vertical'
+            pos_hint:{"center_x":0.5,"center_y":0.1}
+            size_hint:None,None
+            width:root.width-(root.width*1/6)
+            height:root.height-(root.height*1/8)
+            pos_hint:{"center_x":.5,"center_y":.5}
+            elevation:5
+
+
+
+            Label:
+
+
+                font_size:30
+                text:"Stationary"
+
+
+            HomeFound:
+                width:self.parent.width
+                rows:2
+
+                Button:
+                    text:"Pencil"
+                Button:
+                    text:"Stationary Box"
+                Button
+                    text:"Pen"
+                Button
+                    text:"Eraser"
+
+
+
+
+        MDCard:
+            id:menu
+            orientation:'vertical'
+            pos_hint:{"x":root.switch}
+            size_hint:None,None
+            width:root.width/4.5
+            height:root.height
+
+            MDCard:
+                orientation:'vertical'
+                padding:-20
+                pos_hint:{"top":1}
+
+
+                Label:
+                    center_x:self.parent.center_x
+                    font_size:20
+                    text:"Menu"
+
+            Spinner:
+                id:FoundItemsCategories
+                text:"Found Items"
+                values:['Electronics','Stationary','Books','Clothes','Other']
+                on_text:root.FoundCategories(FoundItemsCategories.text)
+                #sync_height=True
+
+            Label:
+            Label:
+            Label:
+            Label:
+            Label:
+
+
+            Button:
+                center_x:self.parent.center_x
+                center_y:self.parent.center_y
+                text:"Report Lost Items"
+                on_press:root.reportitems()
+
+            Label:
+            Label:
+            Label:
+            Label:
+            Label:
+
+
+
+
+        Button:
+            background_color:0,0,0,0
+            pos_hint:{"center_y":0.5,"x":root.extend_x}
+            size_hint:None,None
+            width:40
+            height:90
+
+
+            on_press:root.extend()
+
+            Image:
+                opacity:1
+                source:root.extendSign
+                center_x:self.parent.center_x
+                center_y:self.parent.center_y
+        TopMenu:
+            orientation:'horizontal'
+            pos_hint:{"x":0.22, "top":1}
+            size_hint:None,None
+            width:root.width*0.77
+            height:"35dp"
+
+            MDCard:
+                pos_hint:{"center_x":1, "top":1}
+
+                width:"770dp"
+                height:"35dp"
+
+                TextInput:
+                    id:searchbar
+                    font_size:18
+
+                    hint_text:"Search"
+                    on_text_validate:root.search()
+
+                Button:
+                    pos_hint:{"x":.3, "top":.95}
+                    size_hint:None,None
+                    width:"30dp"
+                    height:"35dp"
+                    background_color:0,0,0,0
+
+
+                    Image:
+                        source:"C:\\Users\\USER\\Pictures\\Game Sprites\\searchicon.png"
+                        width:"30dp"
+                        height:"30dp"
+                        center_x:self.parent.center_x
+                        center_y:self.parent.center_y
+
+
+                MDCard:
+                    pos_hint:{"x":.754,"top":1}
+                    size_hint:None,None
+                    width:"270dp"
+                    height:"35dp"
+
+                    Label:
+                        text:"Username"
+
+
+                Button:
+                    pos_hint:{"x":.965, "top":1}
+                    size_hint:None,None
+                    width:"27dp"
+                    height:"30dp"
+                    background_color:0,0,0,0
+                    on_press:root.logout()
+                    Image:
+                        source:"C:\\Users\\USER\\Pictures\\Game Sprites\\logo.jpg"
+                        center_x:self.parent.center_x
+                        center_y:self.parent.center_y
+                        width:"65dp"
+                        height:"42dp"
+
+
+
+
+
+<Books>:
+    name:"books"
+    FloatLayout:
+        size:root.width,root.height
+
+        MDCard:
+            orientation:'vertical'
+            pos_hint:{"center_x":0.5,"center_y":0.1}
+            size_hint:None,None
+            width:root.width-(root.width*1/6)
+            height:root.height-(root.height*1/8)
+            pos_hint:{"center_x":.5,"center_y":.5}
+            elevation:5
+
+
+
+            Label:
+
+
+                font_size:30
+                text:"white pp"
+
+
+            HomeFound:
+                width:self.parent.width
+                rows:2
+
+                Button:
+                    text:"English TextBook Grade 8"
+
+                Button
+                    text:"Hindi Grammer Textbook"
+
+
+
+
+        MDCard:
+            id:menu
+            orientation:'vertical'
+            pos_hint:{"x":root.switch}
+            size_hint:None,None
+            width:root.width/4.5
+            height:root.height
+
+            MDCard:
+                orientation:'vertical'
+                padding:-20
+                pos_hint:{"top":1}
+
+
+                Label:
+                    center_x:self.parent.center_x
+                    font_size:20
+                    text:"Menu"
+
+            Spinner:
+                id:FoundItemsCategories
+                text:"Found Items"
+                values:['Electronics','Stationary','Books','Clothes','Other']
+                on_text:root.FoundCategories(FoundItemsCategories.text)
+                #sync_height=True
+
+            Label:
+            Label:
+            Label:
+            Label:
+            Label:
+
+
+            Button:
+                center_x:self.parent.center_x
+                center_y:self.parent.center_y
+                text:"Report Lost Items"
+                on_press:root.reportitems()
+
+            Label:
+            Label:
+            Label:
+            Label:
+            Label:
+
+
+
+
+        Button:
+            background_color:0,0,0,0
+            pos_hint:{"center_y":0.5,"x":root.extend_x}
+            size_hint:None,None
+            width:40
+            height:90
+
+
+            on_press:root.extend()
+
+            Image:
+                opacity:1
+                source:root.extendSign
+                center_x:self.parent.center_x
+                center_y:self.parent.center_y
+        TopMenu:
+            orientation:'horizontal'
+            pos_hint:{"x":0.22, "top":1}
+            size_hint:None,None
+            width:root.width*0.77
+            height:"35dp"
+
+            MDCard:
+                pos_hint:{"center_x":1, "top":1}
+
+                width:"770dp"
+                height:"35dp"
+
+                TextInput:
+                    id:searchbar
+                    font_size:18
+
+                    hint_text:"Search"
+                    on_text_validate:root.search()
+
+                Button:
+                    pos_hint:{"x":.3, "top":.95}
+                    size_hint:None,None
+                    width:"30dp"
+                    height:"35dp"
+                    background_color:0,0,0,0
+
+
+                    Image:
+                        source:"C:\\Users\\USER\\Pictures\\Game Sprites\\searchicon.png"
+                        width:"30dp"
+                        height:"30dp"
+                        center_x:self.parent.center_x
+                        center_y:self.parent.center_y
+
+
+                MDCard:
+                    pos_hint:{"x":.754,"top":1}
+                    size_hint:None,None
+                    width:"270dp"
+                    height:"35dp"
+
+                    Label:
+                        text:"Username"
+
+
+                Button:
+                    pos_hint:{"x":.965, "top":1}
+                    size_hint:None,None
+                    width:"27dp"
+                    height:"30dp"
+                    background_color:0,0,0,0
+                    on_press:root.logout()
+                    Image:
+                        source:"C:\\Users\\USER\\Pictures\\Game Sprites\\logo.jpg"
+                        center_x:self.parent.center_x
+                        center_y:self.parent.center_y
+                        width:"65dp"
+                        height:"42dp"
+<Clothes>:
+    name:"clothes"
+    FloatLayout:
+        size:root.width,root.height
+
+        MDCard:
+            orientation:'vertical'
+            pos_hint:{"center_x":0.5,"center_y":0.1}
+            size_hint:None,None
+            width:root.width-(root.width*1/6)
+            height:root.height-(root.height*1/8)
+            pos_hint:{"center_x":.5,"center_y":.5}
+            elevation:5
+
+
+
+            Label:
+
+
+                font_size:30
+                text:"Clothes"
+
+
+            HomeFound:
+                width:self.parent.width
+                rows:2
+
+                Button:
+                    text:"Sweater S size"
+                Button:
+                    text:"Sweater L size"
+
+
+
+
+
+        MDCard:
+            id:menu
+            orientation:'vertical'
+            pos_hint:{"x":root.switch}
+            size_hint:None,None
+            width:root.width/4.5
+            height:root.height
+
+            MDCard:
+                orientation:'vertical'
+                padding:-20
+                pos_hint:{"top":1}
+
+
+                Label:
+                    center_x:self.parent.center_x
+                    font_size:20
+                    text:"Menu"
+
+            Spinner:
+                id:FoundItemsCategories
+                text:"Found Items"
+                values:['Electronics','Stationary','Books','Clothes','Other']
+                on_text:root.FoundCategories(FoundItemsCategories.text)
+                #sync_height=True
+
+            Label:
+            Label:
+            Label:
+            Label:
+            Label:
+
+
+            Button:
+                center_x:self.parent.center_x
+                center_y:self.parent.center_y
+                text:"Report Lost Items"
+                on_press:root.reportitems()
+
+            Label:
+            Label:
+            Label:
+            Label:
+            Label:
+
+
+
+
+        Button:
+            background_color:0,0,0,0
+            pos_hint:{"center_y":0.5,"x":root.extend_x}
+            size_hint:None,None
+            width:40
+            height:90
+
+
+            on_press:root.extend()
+
+            Image:
+                opacity:1
+                source:root.extendSign
+                center_x:self.parent.center_x
+                center_y:self.parent.center_y
+        TopMenu:
+            orientation:'horizontal'
+            pos_hint:{"x":0.22, "top":1}
+            size_hint:None,None
+            width:root.width*0.77
+            height:"35dp"
+
+            MDCard:
+                pos_hint:{"center_x":1, "top":1}
+
+                width:"770dp"
+                height:"35dp"
+
+                TextInput:
+                    id:searchbar
+                    font_size:18
+
+                    hint_text:"Search"
+                    on_text_validate:root.search()
+
+                Button:
+                    pos_hint:{"x":.3, "top":.95}
+                    size_hint:None,None
+                    width:"30dp"
+                    height:"35dp"
+                    background_color:0,0,0,0
+
+
+                    Image:
+                        source:"C:\\Users\\USER\\Pictures\\Game Sprites\\searchicon.png"
+                        width:"30dp"
+                        height:"30dp"
+                        center_x:self.parent.center_x
+                        center_y:self.parent.center_y
+
+
+                MDCard:
+                    pos_hint:{"x":.754,"top":1}
+                    size_hint:None,None
+                    width:"270dp"
+                    height:"35dp"
+
+                    Label:
+                        text:"Username"
+
+
+                Button:
+                    pos_hint:{"x":.965, "top":1}
+                    size_hint:None,None
+                    width:"27dp"
+                    height:"30dp"
+                    background_color:0,0,0,0
+                    on_press:root.logout()
+                    Image:
+                        source:"C:\\Users\\USER\\Pictures\\Game Sprites\\logo.jpg"
+                        center_x:self.parent.center_x
+                        center_y:self.parent.center_y
+                        width:"65dp"
+                        height:"42dp"
+<Others>:
+    name:"others"
+    FloatLayout:
+        size:root.width,root.height
+
+        MDCard:
+            orientation:'vertical'
+            pos_hint:{"center_x":0.5,"center_y":0.1}
+            size_hint:None,None
+            width:root.width-(root.width*1/6)
+            height:root.height-(root.height*1/8)
+            pos_hint:{"center_x":.5,"center_y":.5}
+            elevation:5
+
+
+
+            Label:
+
+
+                font_size:30
+                text:"Others"
+
+
+            HomeFound:
+                width:self.parent.width
+                rows:2
+
+                Button:
+                    text:"Bottle o' Waer"
+
+
+
+
+
+        MDCard:
+            id:menu
+            orientation:'vertical'
+            pos_hint:{"x":root.switch}
+            size_hint:None,None
+            width:root.width/4.5
+            height:root.height
+
+            MDCard:
+                orientation:'vertical'
+                padding:-20
+                pos_hint:{"top":1}
+
+
+                Label:
+                    center_x:self.parent.center_x
+                    font_size:20
+                    text:"Menu"
+
+            Spinner:
+                id:FoundItemsCategories
+                text:"Others"
+                values:['Electronics','Stationary','Books','Clothes']
+                on_text:root.FoundCategories(FoundItemsCategories.text)
+                #sync_height=True
+
+            Label:
+            Label:
+            Label:
+            Label:
+            Label:
+
+
+            Button:
+                center_x:self.parent.center_x
+                center_y:self.parent.center_y
+                text:"Report Lost Items"
+                on_press:root.reportitems()
+
+            Label:
+            Label:
+            Label:
+            Label:
+            Label:
+
+
+
+
+        Button:
+            background_color:0,0,0,0
+            pos_hint:{"center_y":0.5,"x":root.extend_x}
+            size_hint:None,None
+            width:40
+            height:90
+
+
+            on_press:root.extend()
+
+            Image:
+                opacity:1
+                source:root.extendSign
+                center_x:self.parent.center_x
+                center_y:self.parent.center_y
+        TopMenu:
+            orientation:'horizontal'
+            pos_hint:{"x":0.22, "top":1}
+            size_hint:None,None
+            width:root.width*0.77
+            height:"35dp"
+
+            MDCard:
+                pos_hint:{"center_x":1, "top":1}
+
+                width:"770dp"
+                height:"35dp"
+
+                TextInput:
+                    id:searchbar
+                    font_size:18
+
+                    hint_text:"Search"
+                    on_text_validate:root.search()
+
+                Button:
+                    pos_hint:{"x":.3, "top":.95}
+                    size_hint:None,None
+                    width:"30dp"
+                    height:"35dp"
+                    background_color:0,0,0,0
+
+
+                    Image:
+                        source:"C:\\Users\\USER\\Pictures\\Game Sprites\\searchicon.png"
+                        width:"30dp"
+                        height:"30dp"
+                        center_x:self.parent.center_x
+                        center_y:self.parent.center_y
+
+
+                MDCard:
+                    pos_hint:{"x":.754,"top":1}
+                    size_hint:None,None
+                    width:"270dp"
+                    height:"35dp"
+
+                    Label:
+                        text:"Username"
+
+
+                Button:
+                    pos_hint:{"x":.965, "top":1}
+                    size_hint:None,None
+                    width:"27dp"
+                    height:"30dp"
+                    background_color:0,0,0,0
+                    on_press:root.logout()
+                    Image:
+                        source:"C:\\Users\\USER\\Pictures\\Game Sprites\\logo.jpg"
+                        center_x:self.parent.center_x
+                        center_y:self.parent.center_y
+                        width:"65dp"
+                        height:"42dp"
+<NotFound>:
+    name:"notfound"
+    FloatLayout:
+        size:root.width,root.height
+        MDCard:
+            orientation:'vertical'
+            pos_hint:{"center_x":0.5,"center_y":0.1}
+            size_hint:None,None
+            width:root.width-(root.width*1/6)
+            height:root.height-(root.height*1/8)
+            pos_hint:{"center_x":.5,"center_y":.5}
+            elevation:5
+            Label:
+                pos_hint:{"center_x":.2,"y":.3}
+                font_size:50
+                text:"No items Found"
+
+            Label:
+                pos_hint:{"center_x":.45,"y":.1}
+                font_size:30
+                text:"The object you have searched for is not found yet \n you can try to: \n search for a single keyword \n more general keywords \n make sure that it is spelled correctly \n file a request for searching it in the class  "
+
+
+
+
+
+
+        MDCard:
+            id:menu
+            orientation:'vertical'
+            pos_hint:{"x":root.switch}
+            size_hint:None,None
+            width:root.width/4.5
+            height:root.height
+
+            MDCard:
+                orientation:'vertical'
+                padding:-20
+                pos_hint:{"top":1}
+
+
+                Label:
+                    center_x:self.parent.center_x
+                    font_size:20
+                    text:"Menu"
+
+            Spinner:
+                id:FoundItemsCategories
+                text:"Others"
+                values:['Electronics','Stationary','Books','Clothes']
+                on_text:root.FoundCategories(FoundItemsCategories.text)
+                #sync_height=True
+
+            Label:
+            Label:
+            Label:
+            Label:
+            Label:
+
+
+            Button:
+                center_x:self.parent.center_x
+                center_y:self.parent.center_y
+                text:"Report Lost Items"
+                on_press:root.reportitems()
+
+            Label:
+            Label:
+            Label:
+            Label:
+            Label:
+
+
+
+
+        Button:
+            background_color:0,0,0,0
+            pos_hint:{"center_y":0.5,"x":root.extend_x}
+            size_hint:None,None
+            width:40
+            height:90
+
+
+            on_press:root.extend()
+
+            Image:
+                opacity:1
+                source:root.extendSign
+                center_x:self.parent.center_x
+                center_y:self.parent.center_y
+        TopMenu:
+            orientation:'horizontal'
+            pos_hint:{"x":0.22, "top":1}
+            size_hint:None,None
+            width:root.width*0.77
+            height:"35dp"
+
+            MDCard:
+                pos_hint:{"center_x":1, "top":1}
+
+                width:"770dp"
+                height:"35dp"
+
+                TextInput:
+                    id:searchbar
+                    font_size:18
+
+                    hint_text:"Search"
+                    on_text_validate:root.search()
+
+                Button:
+                    pos_hint:{"x":.3, "top":.95}
+                    size_hint:None,None
+                    width:"30dp"
+                    height:"35dp"
+                    background_color:0,0,0,0
+
+
+                    Image:
+                        source:"C:\\Users\\USER\\Pictures\\Game Sprites\\searchicon.png"
+                        width:"30dp"
+                        height:"30dp"
+                        center_x:self.parent.center_x
+                        center_y:self.parent.center_y
+
+
+                MDCard:
+                    pos_hint:{"x":.754,"top":1}
+                    size_hint:None,None
+                    width:"270dp"
+                    height:"35dp"
+
+                    Label:
+                        text:"Username"
+
+
+                Button:
+                    pos_hint:{"x":.965, "top":1}
+                    size_hint:None,None
+                    width:"27dp"
+                    height:"30dp"
+                    background_color:0,0,0,0
+                    on_press:root.logout()
+                    Image:
+                        source:"C:\\Users\\USER\\Pictures\\Game Sprites\\logo.jpg"
+                        center_x:self.parent.center_x
+                        center_y:self.parent.center_y
+                        width:"65dp"
+                        height:"42dp"
+<ReportItems>:
+    name:"reportitems"
+
+    FloatLayout:
+        size:root.width,root.height
+
+
+
+
+        MDCard:
+            orientation:'vertical'
+            pos_hint:{"center_x":0.5,"center_y":0.1}
+            size_hint:None,None
+            width:root.width-(root.width*1/6)
+            height:root.height-(root.height*1/8)
+            pos_hint:{"center_x":.5,"center_y":.5}
+            elevation:5
+
+            Label:
+                font_size:35
+                text_size:self.size
+                halign:"center"
+                text:"Report Lost Item "
+            Label:
+                font_size:20
+                text_size:self.size
+                halign:"left"
+                text:"Name"
+            TextInput:
+                size_hint:None,None
+                width:"500dp"
+                height:"35dp"
+                halign:"left"
+                id:name
+            Label:
+                font_size:20
+                text_size:self.size
+                halign:"left"
+                text:"Name"
+                text:"Grade and Section"
+            TextInput:
+                size_hint:None,None
+                width:"500dp"
+                height:"35dp"
+                halign:"left"
+                id:grade
+            Label:
+                font_size:20
+                text_size:self.size
+                halign:"left"
+                text:"Name"
+                text:"Item which has been lost"
+            TextInput:
+                size_hint:None,None
+                width:"500dp"
+                height:"35dp"
+                halign:"left"
+                id:item
+            Spinner:
+                id:categories
+                text:"Category"
+                size_hint:None,None
+                width:"500dp"
+                height:"35dp"
+                values:['Electronics','Stationary','Books','Clothes','Other']
+            Label
+                font_size:20
+                text_size:self.size
+                halign:"left"
+                text:"Name"
+                text:"Brand of Item"
+            TextInput:
+                size_hint:None,None
+                width:"500dp"
+                height:"35dp"
+                halign:"left"
+                id:brand
+            Label
+                font_size:20
+                text_size:self.size
+                halign:"left"
+                text:"Name"
+                text:"Color"
+            TextInput:
+                size_hint:None,None
+                width:"500dp"
+                height:"35dp"
+                halign:"left"
+                id:color
+            Label:
+                font_size:20
+                text_size:self.size
+                halign:"left"
+                text:"Name"
+                text:"Time when lost"
+            TextInput:
+                size_hint:None,None
+                width:"500dp"
+                height:"35dp"
+                halign:"left"
+                id:time
+            Label
+                font_size:20
+                text_size:self.size
+                halign:"left"
+                text:"Name"
+                text:"Last known location"
+            TextInput:
+                size_hint:None,None
+                width:"500dp"
+                height:"35dp"
+                halign:"left"
+                id:location
+            Button:
+                size_hint:None,None
+                width:"500dp"
+                height:"35dp"
+                halign:"left"
+                text:"Photo"
+                on_press:root.photo()
+
+
+
+
+
+
+
+        MDCard:
+            id:menu
+            orientation:'vertical'
+            pos_hint:{"x":root.switch}
+            size_hint:None,None
+            width:root.width/4.5
+            height:root.height
+
+            MDCard:
+                orientation:'vertical'
+                padding:-20
+                pos_hint:{"top":1}
+
+
+                Label:
+                    center_x:self.parent.center_x
+                    font_size:20
+                    text:"Menu"
+
+            Spinner:
+                id:FoundItemsCategories
+                text:"Others"
+                values:['Electronics','Stationary','Books','Clothes']
+                on_text:root.FoundCategories(FoundItemsCategories.text)
+                #sync_height=True
+
+            Label:
+            Label:
+            Label:
+            Label:
+            Label:
+
+
+            Button:
+                center_x:self.parent.center_x
+                center_y:self.parent.center_y
+                text:"Report Lost Items"
+                on_press:root.reportitems()
+
+            Label:
+            Label:
+            Label:
+            Label:
+            Label:
+
+
+
+
+        Button:
+            background_color:0,0,0,0
+            pos_hint:{"center_y":0.5,"x":root.extend_x}
+            size_hint:None,None
+            width:40
+            height:90
+
+
+            on_press:root.extend()
+
+            Image:
+                opacity:1
+                source:root.extendSign
+                center_x:self.parent.center_x
+                center_y:self.parent.center_y
+        TopMenu:
+            orientation:'horizontal'
+            pos_hint:{"x":0.22, "top":1}
+            size_hint:None,None
+            width:root.width*0.77
+            height:"35dp"
+
+            MDCard:
+                pos_hint:{"center_x":1, "top":1}
+
+                width:"770dp"
+                height:"35dp"
+
+                TextInput:
+                    id:searchbar
+                    font_size:18
+
+                    hint_text:"Search"
+                    on_text_validate:root.search()
+
+                Button:
+                    pos_hint:{"x":.3, "top":.95}
+                    size_hint:None,None
+                    width:"30dp"
+                    height:"35dp"
+                    background_color:0,0,0,0
+
+
+                    Image:
+                        source:"C:\\Users\\USER\\Pictures\\Game Sprites\\searchicon.png"
+                        width:"30dp"
+                        height:"30dp"
+                        center_x:self.parent.center_x
+                        center_y:self.parent.center_y
+
+
+                MDCard:
+                    pos_hint:{"x":.754,"top":1}
+                    size_hint:None,None
+                    width:"270dp"
+                    height:"35dp"
+
+                    Label:
+                        text:"Username"
+
+
+                Button:
+                    pos_hint:{"x":.965, "top":1}
+                    size_hint:None,None
+                    width:"27dp"
+                    height:"30dp"
+                    background_color:0,0,0,0
+                    on_press:root.logout()
+                    Image:
+                        source:"C:\\Users\\USER\\Pictures\\Game Sprites\\logo.jpg"
+                        center_x:self.parent.center_x
+                        center_y:self.parent.center_y
+                        width:"65dp"
+                        height:"42dp"
+<Photo>:
+    name:"photo"
+
+    FloatLayout:
+        size:root.width,root.height
+
+
+
+        MDCard:
+            orientation:'vertical'
+            pos_hint:{"center_x":0.5,"center_y":0.1}
+            size_hint:None,None
+            width:root.width-(root.width*1/6)
+            height:root.height-(root.height*1/8)
+            pos_hint:{"center_x":.5,"center_y":.5}
+            elevation:5
+
+            Image:
+                id:photoconfirm
+                source:""
+
+            FileChooserListView:
+                id:photochooser
+                on_selection:root.hh()
+
+
+            Button:
+                center_x:self.parent.center_x
+                size_hint:None,None
+                width:"500dp"
+                height:"35dp"
+                halign:"left"
+                text:"Report"
+
+
+
+
+
+
+
+        MDCard:
+            id:menu
+            orientation:'vertical'
+            pos_hint:{"x":root.switch}
+            size_hint:None,None
+            width:root.width/4.5
+            height:root.height
+
+            MDCard:
+                orientation:'vertical'
+                padding:-20
+                pos_hint:{"top":1}
+
+
+                Label:
+                    center_x:self.parent.center_x
+                    font_size:20
+                    text:"Menu"
+
+            Spinner:
+                id:FoundItemsCategories
+                text:"Others"
+                values:['Electronics','Stationary','Books','Clothes']
+                on_text:root.FoundCategories(FoundItemsCategories.text)
+                #sync_height=True
+
+            Label:
+            Label:
+            Label:
+            Label:
+            Label:
+
+
+            Button:
+                center_x:self.parent.center_x
+                center_y:self.parent.center_y
+                text:"Report Lost Items"
+                on_press:root.reportitems()
+
+            Label:
+            Label:
+            Label:
+            Label:
+            Label:
+
+
+
+
+        Button:
+            background_color:0,0,0,0
+            pos_hint:{"center_y":0.5,"x":root.extend_x}
+            size_hint:None,None
+            width:40
+            height:90
+
+
+            on_press:root.extend()
+
+            Image:
+                opacity:1
+                source:root.extendSign
+                center_x:self.parent.center_x
+                center_y:self.parent.center_y
+        TopMenu:
+            orientation:'horizontal'
+            pos_hint:{"x":0.22, "top":1}
+            size_hint:None,None
+            width:root.width*0.77
+            height:"35dp"
+
+            MDCard:
+                pos_hint:{"center_x":1, "top":1}
+
+                width:"770dp"
+                height:"35dp"
+
+                TextInput:
+                    id:searchbar
+                    font_size:18
+
+                    hint_text:"Search"
+                    on_text_validate:root.search()
+
+                Button:
+                    pos_hint:{"x":.3, "top":.95}
+                    size_hint:None,None
+                    width:"30dp"
+                    height:"35dp"
+                    background_color:0,0,0,0
+
+
+                    Image:
+                        source:"C:\\Users\\USER\\Pictures\\Game Sprites\\searchicon.png"
+                        width:"30dp"
+                        height:"30dp"
+                        center_x:self.parent.center_x
+                        center_y:self.parent.center_y
+
+
+                MDCard:
+                    pos_hint:{"x":.754,"top":1}
+                    size_hint:None,None
+                    width:"270dp"
+                    height:"35dp"
+
+                    Label:
+                        text:"Username"
+
+
+                Button:
+                    pos_hint:{"x":.965, "top":1}
+                    size_hint:None,None
+                    width:"27dp"
+                    height:"30dp"
+                    background_color:0,0,0,0
+                    on_press:root.logout()
+                    Image:
+                        source:"C:\\Users\\USER\\Pictures\\Game Sprites\\logo.jpg"
+                        center_x:self.parent.center_x
+                        center_y:self.parent.center_y
+                        width:"65dp"
+                        height:"42dp"
+
+
+<SweaterDescription>:
+    name:"sweaterdescription"
+
+    FloatLayout:
+        size:root.width,root.height
+
+
+
+
+
+        MDCard:
+            pos_hint:{'center_x':.5,'center_y':.45}
+            orientation:'vertical'
+            size_hint:None,None
+            width:"1320dp"
+            height:"600dp"
+
+            Image:
+                source:""
+
+            Label:
+                font_size:30
+                text_size:self.size
+                halign:"center"
+                text:"Sweater"
+            Label:
+                font_size:20
+                text_size:self.size
+                halign:"left"
+                text:"Item"
+            Label:
+                font_size:13
+                halign:"left"
+                id:FDname
+                text:"School Sweater size-18"
+            Label:
+                font_size:20
+                text_size:self.size
+                halign:"left"
+
+                text:"Status:"
+            Label:
+                font_size:13
+                halign:"left"
+                id:foundorlost
+                text:"Found"
+
+
+            Label
+                font_size:20
+                text_size:self.size
+                halign:"left"
+
+                text:"Brand"
+            Label:
+                font_size:13
+                halign:"left"
+                id:FDbrand
+                text:"Threads"
+            Label
+                font_size:20
+                text_size:self.size
+                halign:"left"
+
+                text:"Color"
+            Label:
+                font_size:13
+
+                halign:"left"
+                id:color
+                text:"Brown"
+            Label:
+                font_size:20
+                text_size:self.size
+                halign:"left"
+                text:"Name"
+                text:"Time when lost"
+            Label:
+                font_size:13
+                halign:"left"
+                id:FDtime
+                text:"2023/05/04 12:14 pm"
+            Label
+                font_size:20
+                text_size:self.size
+                halign:"left"
+
+                text:"Found location"
+            Label:
+
+                font_size:13
+                halign:"left"
+                id:FDlocation
+                text:"Corridor"
+            Button:
+
+                halign:"center"
+                text:"Request for Claim"
+                on_press:root.claimitem()
+
+
+
+
+
+
+
+        MDCard:
+            id:menu
+            orientation:'vertical'
+            pos_hint:{"x":root.switch}
+            size_hint:None,None
+            width:root.width/4.5
+            height:root.height
+
+            MDCard:
+                orientation:'vertical'
+                padding:-20
+                pos_hint:{"top":1}
+
+
+                Label:
+                    center_x:self.parent.center_x
+                    font_size:20
+                    text:"Menu"
+
+            Spinner:
+                id:FoundItemsCategories
+                text:"Others"
+                values:['Electronics','Stationary','Books','Clothes']
+                on_text:root.FoundCategories(FoundItemsCategories.text)
+                #sync_height=True
+
+            Label:
+            Label:
+            Label:
+            Label:
+            Label:
+
+
+            Button:
+                center_x:self.parent.center_x
+                center_y:self.parent.center_y
+                text:"Report Lost Items"
+                on_press:root.reportitems()
+
+            Label:
+            Label:
+            Label:
+            Label:
+            Label:
+
+
+
+
+        Button:
+            background_color:0,0,0,0
+            pos_hint:{"center_y":0.5,"x":root.extend_x}
+            size_hint:None,None
+            width:40
+            height:90
+
+
+            on_press:root.extend()
+
+            Image:
+                opacity:1
+                source:root.extendSign
+                center_x:self.parent.center_x
+                center_y:self.parent.center_y
+        TopMenu:
+            orientation:'horizontal'
+            pos_hint:{"x":0.22, "top":1}
+            size_hint:None,None
+            width:root.width*0.77
+            height:"35dp"
+
+            MDCard:
+                pos_hint:{"center_x":1, "top":1}
+
+                width:"770dp"
+                height:"35dp"
+
+                TextInput:
+                    id:searchbar
+                    font_size:18
+
+                    hint_text:"Search"
+                    on_text_validate:root.search()
+
+                Button:
+                    pos_hint:{"x":.3, "top":.95}
+                    size_hint:None,None
+                    width:"30dp"
+                    height:"35dp"
+                    background_color:0,0,0,0
+
+
+                    Image:
+                        source:"C:\\Users\\USER\\Pictures\\Game Sprites\\searchicon.png"
+                        width:"30dp"
+                        height:"30dp"
+                        center_x:self.parent.center_x
+                        center_y:self.parent.center_y
+
+
+                MDCard:
+                    pos_hint:{"x":.754,"top":1}
+                    size_hint:None,None
+                    width:"270dp"
+                    height:"35dp"
+
+                    Label:
+                        text:"Username"
+
+
+                Button:
+                    pos_hint:{"x":.965, "top":1}
+                    size_hint:None,None
+                    width:"27dp"
+                    height:"30dp"
+                    background_color:0,0,0,0
+                    on_press:root.logout()
+                    Image:
+                        source:"C:\\Users\\USER\\Pictures\\Game Sprites\\logo.jpg"
+                        center_x:self.parent.center_x
+                        center_y:self.parent.center_y
+                        width:"65dp"
+                        height:"42dp"
+
+<FoundItemDescription>:
+    name:"founditemdescription"
+
+    FloatLayout:
+        size:root.width,root.height
+
+
+
+
+
+        MDCard:
+            orientation:'vertical'
+            pos_hint:{"center_x":0.5,"center_y":0.1}
+            size_hint:None,None
+            width:root.width-(root.width*1/6)
+            height:root.height-(root.height*1/8)
+            pos_hint:{"center_x":.5,"center_y":.5}
+            elevation:5
+
+            Label:
+                font_size:30
+                text_size:self.size
+                halign:"center"
+                text:"Ipad"
+            Label:
+                font_size:20
+                text_size:self.size
+                halign:"left"
+                text:"Item"
+            Label:
+                font_size:13
+                halign:"left"
+                id:FDname
+                text:"Ipad 10"
+            Label:
+                font_size:20
+                text_size:self.size
+                halign:"left"
+
+                text:"Status:"
+            Label:
+                font_size:13
+                halign:"left"
+                id:foundorlost
+                text:"Found"
+
+
+            Label
+                font_size:20
+                text_size:self.size
+                halign:"left"
+
+                text:"Brand"
+            Label:
+                font_size:13
+                halign:"left"
+                id:FDbrand
+                text:"Apple"
+            Label
+                font_size:20
+                text_size:self.size
+                halign:"left"
+
+                text:"Color"
+            Label:
+                font_size:13
+
+                halign:"left"
+                id:color
+                text:"Yellow"
+            Label:
+                font_size:20
+                text_size:self.size
+                halign:"left"
+                text:"Name"
+                text:"Time when lost"
+            Label:
+                font_size:13
+                halign:"left"
+                id:FDtime
+                text:"2023/04/07 10:42 am"
+            Label
+                font_size:20
+                text_size:self.size
+                halign:"left"
+
+                text:"Found location"
+            Label:
+
+                font_size:13
+                halign:"left"
+                id:FDlocation
+                text:" Library"
+            Button:
+
+                halign:"center"
+                text:"Request for Claim"
+                on_press:root.claimitem()
+
+
+
+
+
+
+
+        MDCard:
+            id:menu
+            orientation:'vertical'
+            pos_hint:{"x":root.switch}
+            size_hint:None,None
+            width:root.width/4.5
+            height:root.height
+
+            MDCard:
+                orientation:'vertical'
+                padding:-20
+                pos_hint:{"top":1}
+
+
+                Label:
+                    center_x:self.parent.center_x
+                    font_size:20
+                    text:"Menu"
+
+            Spinner:
+                id:FoundItemsCategories
+                text:"Others"
+                values:['Electronics','Stationary','Books','Clothes']
+                on_text:root.FoundCategories(FoundItemsCategories.text)
+                #sync_height=True
+
+            Label:
+            Label:
+            Label:
+            Label:
+            Label:
+
+
+            Button:
+                center_x:self.parent.center_x
+                center_y:self.parent.center_y
+                text:"Report Lost Items"
+                on_press:root.reportitems()
+
+            Label:
+            Label:
+            Label:
+            Label:
+            Label:
+
+
+
+
+        Button:
+            background_color:0,0,0,0
+            pos_hint:{"center_y":0.5,"x":root.extend_x}
+            size_hint:None,None
+            width:40
+            height:90
+
+
+            on_press:root.extend()
+
+            Image:
+                opacity:1
+                source:root.extendSign
+                center_x:self.parent.center_x
+                center_y:self.parent.center_y
+        TopMenu:
+            orientation:'horizontal'
+            pos_hint:{"x":0.22, "top":1}
+            size_hint:None,None
+            width:root.width*0.77
+            height:"35dp"
+
+            MDCard:
+                pos_hint:{"center_x":1, "top":1}
+
+                width:"770dp"
+                height:"35dp"
+
+                TextInput:
+                    id:searchbar
+                    font_size:18
+
+                    hint_text:"Search"
+                    on_text_validate:root.search()
+
+                Button:
+                    pos_hint:{"x":.3, "top":.95}
+                    size_hint:None,None
+                    width:"30dp"
+                    height:"35dp"
+                    background_color:0,0,0,0
+
+
+                    Image:
+                        source:"C:\\Users\\USER\\Pictures\\Game Sprites\\searchicon.png"
+                        width:"30dp"
+                        height:"30dp"
+                        center_x:self.parent.center_x
+                        center_y:self.parent.center_y
+
+
+                MDCard:
+                    pos_hint:{"x":.754,"top":1}
+                    size_hint:None,None
+                    width:"270dp"
+                    height:"35dp"
+
+                    Label:
+                        text:"Username"
+
+
+                Button:
+                    pos_hint:{"x":.965, "top":1}
+                    size_hint:None,None
+                    width:"27dp"
+                    height:"30dp"
+                    background_color:0,0,0,0
+                    on_press:root.logout()
+                    Image:
+                        source:"C:\\Users\\USER\\Pictures\\Game Sprites\\logo.jpg"
+                        center_x:self.parent.center_x
+                        center_y:self.parent.center_y
+                        width:"65dp"
+                        height:"42dp"
+<Proof>:
+    name:"proof"
+
+    FloatLayout:
+        size:root.width,root.height
+
+
+
+        MDCard:
+            orientation:'vertical'
+            pos_hint:{"center_x":0.5,"center_y":0.1}
+            size_hint:None,None
+            width:root.width-(root.width*1/6)
+            height:root.height-(root.height*1/8)
+            pos_hint:{"center_x":.5,"center_y":.5}
+            elevation:5
+
+
+            Label:
+                font_size:35
+                text_size:self.size
+                halign:"center"
+                text:"Proof required for claim"
+            Label:
+                font_size:20
+                text_size:self.size
+                halign:"left"
+                text:"Name"
+            TextInput:
+                size_hint:None,None
+                width:"500dp"
+                height:"35dp"
+                halign:"left"
+                id:name
+            Label:
+                font_size:20
+                text_size:self.size
+                halign:"left"
+                text:"Name"
+                text:"Grade and Section"
+            TextInput:
+                size_hint:None,None
+                width:"500dp"
+                height:"35dp"
+                halign:"left"
+                id:grade
+            Label
+                font_size:20
+                text_size:self.size
+                halign:"left"
+
+                text:"Visual Proof(photo of the student holding or using the item)"
+
+            Image:
+                id:photodisplayproof
+                source:""
+            FileChooserListView:
+                id:photoproof
+                on_selection:root.hh()
+            Button:
+                size_hint:None,None
+                width:"500dp"
+                height:"35dp"
+                halign:"left"
+                text:root.i
+                on_press:root.claim()
+
+
+
+
+
+
+
+        MDCard:
+            id:menu
+            orientation:'vertical'
+            pos_hint:{"x":root.switch}
+            size_hint:None,None
+            width:root.width/4.5
+            height:root.height
+
+            MDCard:
+                orientation:'vertical'
+                padding:-20
+                pos_hint:{"top":1}
+
+
+                Label:
+                    center_x:self.parent.center_x
+                    font_size:20
+                    text:"Menu"
+
+            Spinner:
+                id:FoundItemsCategories
+                text:"Others"
+                values:['Electronics','Stationary','Books','Clothes']
+                on_text:root.FoundCategories(FoundItemsCategories.text)
+                #sync_height=True
+
+            Label:
+            Label:
+            Label:
+            Label:
+            Label:
+
+
+            Button:
+                center_x:self.parent.center_x
+                center_y:self.parent.center_y
+                text:"Report Lost Items"
+                on_press:root.reportitems()
+
+            Label:
+            Label:
+            Label:
+            Label:
+            Label:
+
+
+
+
+        Button:
+            background_color:0,0,0,0
+            pos_hint:{"center_y":0.5,"x":root.extend_x}
+            size_hint:None,None
+            width:40
+            height:90
+
+
+            on_press:root.extend()
+
+            Image:
+                opacity:1
+                source:root.extendSign
+                center_x:self.parent.center_x
+                center_y:self.parent.center_y
+        TopMenu:
+            orientation:'horizontal'
+            pos_hint:{"x":0.22, "top":1}
+            size_hint:None,None
+            width:root.width*0.77
+            height:"35dp"
+
+            MDCard:
+                pos_hint:{"center_x":1, "top":1}
+
+                width:"770dp"
+                height:"35dp"
+
+                TextInput:
+                    id:searchbar
+                    font_size:18
+
+                    hint_text:"Search"
+                    on_text_validate:root.search()
+
+                Button:
+                    pos_hint:{"x":.3, "top":.95}
+                    size_hint:None,None
+                    width:"30dp"
+                    height:"35dp"
+                    background_color:0,0,0,0
+
+
+                    Image:
+                        source:"C:\\Users\\USER\\Pictures\\Game Sprites\\searchicon.png"
+                        width:"30dp"
+                        height:"30dp"
+                        center_x:self.parent.center_x
+                        center_y:self.parent.center_y
+
+
+                MDCard:
+                    pos_hint:{"x":.754,"top":1}
+                    size_hint:None,None
+                    width:"270dp"
+                    height:"35dp"
+
+                    Label:
+                        text:"Username"
+
+
+                Button:
+                    pos_hint:{"x":.965, "top":1}
+                    size_hint:None,None
+                    width:"27dp"
+                    height:"30dp"
+                    background_color:0,0,0,0
+                    on_press:root.logout()
+                    Image:
+                        source:"C:\\Users\\USER\\Pictures\\Game Sprites\\logo.jpg"
+                        center_x:self.parent.center_x
+                        center_y:self.parent.center_y
+                        width:"65dp"
+                        height:"42dp"
